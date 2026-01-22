@@ -1,62 +1,77 @@
 import { useState } from 'react'
-import './Navbar.css'
 
 function Navbar() {
   const [aboutDropdown, setAboutDropdown] = useState(false)
   const [servicesDropdown, setServicesDropdown] = useState(false)
 
   return (
-    <nav className="navbar">
-      <div className="navbar-container">
-        <div className="navbar-logo">
-          <span className="logo-main">windsmil</span>
-          <span className="logo-sub">Air</span>
+    <nav className="w-full bg-[#FFEB3B] px-4 md:px-8 py-4 shadow-md">
+      <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0">
+        <div className="flex flex-col leading-none">
+          <span className="text-2xl md:text-3xl font-bold text-[#4CAF50] font-sans tracking-tight">windsmil</span>
+          <span className="text-sm md:text-base text-[#4CAF50] font-sans -mt-0.5">Air</span>
         </div>
         
-        <div className="navbar-links">
-          <a href="#" className="nav-link">Home</a>
+        <div className="flex items-center flex-wrap justify-center gap-4 md:gap-8">
+          <a href="#" className="text-black no-underline font-sans text-base font-normal transition-colors hover:text-gray-700 flex items-center gap-1">
+            Home
+          </a>
           
           <div 
-            className="nav-link-dropdown"
+            className="relative"
             onMouseEnter={() => setAboutDropdown(true)}
             onMouseLeave={() => setAboutDropdown(false)}
           >
-            <a href="#" className="nav-link">
+            <a href="#" className="text-black no-underline font-sans text-base font-normal transition-colors hover:text-gray-700 flex items-center gap-1">
               About Us
-              <span className="dropdown-icon">▼</span>
+              <span className="text-xs ml-1">▼</span>
             </a>
             {aboutDropdown && (
-              <div className="dropdown-menu">
-                <a href="#">Our Story</a>
-                <a href="#">Team</a>
-                <a href="#">Mission</a>
+              <div className="absolute top-full left-0 bg-white shadow-lg rounded-md py-2 mt-2 min-w-[150px] z-[1000]">
+                <a href="#" className="block px-4 py-2 text-black no-underline font-sans text-sm hover:bg-gray-100">
+                  Our Story
+                </a>
+                <a href="#" className="block px-4 py-2 text-black no-underline font-sans text-sm hover:bg-gray-100">
+                  Team
+                </a>
+                <a href="#" className="block px-4 py-2 text-black no-underline font-sans text-sm hover:bg-gray-100">
+                  Mission
+                </a>
               </div>
             )}
           </div>
           
           <div 
-            className="nav-link-dropdown"
+            className="relative"
             onMouseEnter={() => setServicesDropdown(true)}
             onMouseLeave={() => setServicesDropdown(false)}
           >
-            <a href="#" className="nav-link">
+            <a href="#" className="text-black no-underline font-sans text-base font-normal transition-colors hover:text-gray-700 flex items-center gap-1">
               Services
-              <span className="dropdown-icon">▼</span>
+              <span className="text-xs ml-1">▼</span>
             </a>
             {servicesDropdown && (
-              <div className="dropdown-menu">
-                <a href="#">Service 1</a>
-                <a href="#">Service 2</a>
-                <a href="#">Service 3</a>
+              <div className="absolute top-full left-0 bg-white shadow-lg rounded-md py-2 mt-2 min-w-[150px] z-[1000]">
+                <a href="#" className="block px-4 py-2 text-black no-underline font-sans text-sm hover:bg-gray-100">
+                  Service 1
+                </a>
+                <a href="#" className="block px-4 py-2 text-black no-underline font-sans text-sm hover:bg-gray-100">
+                  Service 2
+                </a>
+                <a href="#" className="block px-4 py-2 text-black no-underline font-sans text-sm hover:bg-gray-100">
+                  Service 3
+                </a>
               </div>
             )}
           </div>
           
-          <a href="#" className="nav-link">Contact us</a>
+          <a href="#" className="text-black no-underline font-sans text-base font-normal transition-colors hover:text-gray-700 flex items-center gap-1">
+            Contact us
+          </a>
           
-          <a href="#" className="nav-link whatsapp-link">
+          <a href="#" className="text-black no-underline font-sans text-base font-normal transition-colors hover:text-gray-700 flex items-center justify-center">
             <svg 
-              className="whatsapp-icon" 
+              className="w-6 h-6" 
               viewBox="0 0 24 24" 
               fill="none" 
               xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +83,9 @@ function Navbar() {
             </svg>
           </a>
           
-          <a href="#" className="nav-link">Blog</a>
+          <a href="#" className="text-black no-underline font-sans text-base font-normal transition-colors hover:text-gray-700 flex items-center gap-1">
+            Blog
+          </a>
         </div>
       </div>
     </nav>
