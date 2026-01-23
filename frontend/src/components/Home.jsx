@@ -28,7 +28,7 @@ function Home() {
     <div className="w-full bg-[#FAFAFA] text-gray-900 font-sans selection:bg-[#FFEB3B] selection:text-black">
       
       {/* --- HERO SECTION: Asymmetric Editorial --- */}
-      <section className="relative pt-16 md:pt-5 pb-20 px-6 md:px-12 lg:px-16 overflow-hidden">
+      <section className="relative pt-16 md:pt-20 pb-20 px-6 md:px-12 lg:px-16 overflow-hidden">
         {/* Background Blobs */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FFEB3B]/10 rounded-full blur-3xl -z-10 translate-x-1/3 -translate-y-1/4"></div>
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#4CAF50]/5 rounded-full blur-3xl -z-10 -translate-x-1/3 translate-y-1/4"></div>
@@ -67,22 +67,22 @@ function Home() {
 
           {/* Hero Visual - Abstract Composition */}
           <div className="lg:col-span-5 relative hidden lg:block">
-            <div className="relative z-10 bg-white p-1.5 rounded-xl shadow-lg rotate-2 hover:rotate-0 transition-transform duration-500 max-w-xs mx-auto">
-              <div className="bg-gray-100 rounded-lg overflow-hidden aspect-[3/4] relative flex items-center justify-center">
+            <div className="relative z-10 bg-white p-2 rounded-[2rem] shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500">
+              <div className="bg-gray-100 rounded-[1.5rem] overflow-hidden aspect-[4/5] relative flex items-center justify-center">
                  {/* Abstract representation of air flow */}
                  <div className="absolute inset-0 bg-gradient-to-tr from-[#4CAF50]/20 to-[#FFEB3B]/20"></div>
-                 <div className="text-5xl opacity-10"></div>
+                 <div className="text-9xl opacity-10">🌬️</div>
                  
                  {/* Floating Stats Card */}
-                 <div className="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-md p-3 rounded-lg shadow-md border border-white/50">
+                 <div className="absolute bottom-8 left-8 right-8 bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-white/50">
                     <div className="flex justify-between items-end">
                       <div>
-                        <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-0.5">Energy Saved</div>
-                        <div className="text-xl font-bold text-[#4CAF50]">40%</div>
+                        <div className="text-sm text-gray-500 uppercase tracking-wider mb-1">Energy Saved</div>
+                        <div className="text-3xl font-bold text-[#4CAF50]">40%</div>
                       </div>
                       <div className="text-right">
-                        <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-0.5">Air Quality</div>
-                        <div className="text-xl font-bold text-[#FFEB3B] drop-shadow-sm">99.9%</div>
+                        <div className="text-sm text-gray-500 uppercase tracking-wider mb-1">Air Quality</div>
+                        <div className="text-3xl font-bold text-[#FFEB3B] drop-shadow-sm">99.9%</div>
                       </div>
                     </div>
                  </div>
