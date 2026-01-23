@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Footer from './Footer'
 
 function Home() {
   const [activeService, setActiveService] = useState('AC')
@@ -9,12 +10,12 @@ function Home() {
   const banners = [
     {
       id: 1,
-      image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1769154133/AC_Banner_jf0tkj.svg',
+      image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1769165851/White_and_Blue_Modern_Air_Conditioning_Installation_Services_Facebook_Post_Landscape_1920_x_600_mm_1920_x_600_mm_2_s79yu4.svg',
       alt: 'Banner 1'
     },
     {
       id: 2,
-      image: 'https://via.placeholder.com/1920x600/FFEB3B/000000?text=Banner+2',
+      image: 'https://res.cloudinary.com/dvkxgrcbv/image/upload/v1769165130/White_and_Blue_Modern_Air_Conditioning_Installation_Services_Facebook_Post_Landscape_1920_x_600_mm_1920_x_600_mm_io7uxq.svg',
       alt: 'Banner 2'
     },
     {
@@ -49,9 +50,9 @@ function Home() {
     setOpenServices((prev) => {
       // Convert serviceId to number to ensure consistent type
       const id = Number(serviceId)
-      const isCurrentlyOpen = prev[id] === true
+      const isCurrentlyOpen = Boolean(prev[id])
       
-      // Create new state object - close all services first
+      // Create new state object - explicitly close all services first
       const newState = {
         1: false,
         2: false,
@@ -59,7 +60,7 @@ function Home() {
         4: false
       }
       
-      // If the clicked service wasn't open, open it now
+      // Only open the clicked service if it wasn't already open
       if (!isCurrentlyOpen) {
         newState[id] = true
       }
@@ -233,13 +234,37 @@ function Home() {
         </div>
       </section>
 
-      {/* Image Section */}
-      <section className="w-full relative overflow-hidden">
-        <img 
-          src="https://res.cloudinary.com/dvkxgrcbv/image/upload/v1769081376/White_and_Blue_Modern_Air_Conditioning_Installation_Services_Facebook_Post_Landscape_1920_x_600_mm_uzev7q.svg" 
-          alt="Air Conditioning Installation Services" 
-          className="w-full h-auto object-contain"
-        />
+      {/* Image Section with Contact Details */}
+      <section className="w-full relative overflow-hidden bg-black py-4 md:py-6">
+        <div className="relative w-full">
+          {/* Background Image */}
+          <img 
+            src="https://res.cloudinary.com/dvkxgrcbv/image/upload/v1769166501/White_and_Blue_Modern_Air_Conditioning_Installation_Services_Facebook_Post_Landscape_1920_x_600_mm_1_zydfot.svg" 
+            alt="Cooler" 
+            className="w-full h-auto object-cover"
+          />
+          
+          {/* Contact Details Overlay - Right Side */}
+          <div className="absolute top-0 right-0 h-full w-full md:w-1/2 lg:w-2/5 flex items-center justify-center pr-4 md:pr-6 lg:pr-8">
+            <div className="max-w-md text-white text-center">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2 drop-shadow-lg">Contact Us</h2>
+               
+              
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-xl md:text-2xl font-semibold text-white mb-3 drop-shadow-md">Get in Touch</h3>
+                  <p className="text-base md:text-lg text-white leading-relaxed drop-shadow-md">
+                    Ready to improve your indoor air quality? Contact us today for expert HVAC solutions, installation, and maintenance services.
+                  </p>
+                </div>
+                
+                <button className="px-8 py-4 bg-gray-800 text-white rounded-lg font-semibold uppercase hover:bg-gray-700 transition-colors text-base md:text-lg">
+                  Request a Quote
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* --- SERVICES SECTION --- */}
@@ -250,7 +275,7 @@ function Home() {
             <div className="space-y-8">
               {/* Subtitle */}
               <div className="flex items-center gap-3">
-                <div className="h-0.5 w-12 bg-[#FFEB3B]"></div>
+                <div className="h-0.5 w-12 bg-[#4CAF50]"></div>
                 <span className="text-sm font-medium uppercase tracking-wider text-gray-600">OUR SERVICES</span>
               </div>
 
@@ -260,7 +285,7 @@ function Home() {
               </h2>
 
               {/* CTA Button */}
-              <button className="px-8 py-4 bg-[#FFEB3B] text-black rounded-lg font-semibold uppercase flex items-center gap-2 hover:bg-[#FFD700] transition-colors">
+              <button className="px-8 py-4 bg-[#fff121] text-black rounded-lg font-semibold uppercase flex items-center gap-2 hover:bg-[#45a049] transition-colors">
                 OUR SERVICES
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -274,177 +299,185 @@ function Home() {
               <div className="bg-gray-50 rounded-lg p-4 shadow-lg border border-gray-100 flex flex-col items-center text-center relative min-h-[200px]">
                 {/* Icon */}
                 <div className="mb-3">
-                  <svg className="w-12 h-12 text-[#FFEB3B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-12 h-12 text-[#4CAF50]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
                 {/* Separator Line */}
-                <div className="h-0.5 w-12 bg-[#FFEB3B] mb-3"></div>
+                <div className="h-0.5 w-12 bg-[#4CAF50] mb-3"></div>
                 {/* Text */}
                 <h3 className="text-xs font-bold uppercase text-gray-900 mb-4 leading-tight">AIR CONDITIONING</h3>
                 {/* Plus Button */}
                 <button
-                  onClick={() => toggleService(1)}
-                  className="w-8 h-8 rounded-full bg-[#FFEB3B] flex items-center justify-center hover:scale-110 transition-transform"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    toggleService(1)
+                  }}
+                  className="w-8 h-8 rounded-full bg-[#4CAF50] flex items-center justify-center hover:scale-110 transition-transform"
+                  type="button"
                 >
-                  {openServices[1] ? (
-                    <svg className="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  {Boolean(openServices[1]) ? (
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M20 12H4" />
                     </svg>
                   ) : (
-                    <svg className="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 4v16m8-8H4" />
                     </svg>
                   )}
                 </button>
                 {/* Dropdown Content */}
-                <div
-                  className={`w-full overflow-hidden transition-all duration-300 ${
-                    openServices[1] ? 'max-h-[500px] opacity-100 mt-3' : 'max-h-0 opacity-0'
-                  }`}
-                >
-                  <ul className="space-y-2 text-left text-gray-700 text-xs">
-                    {servicesList[0].items.map((item, index) => (
-                      <li key={index} className="flex items-start">
-                        <span className="text-[#FFEB3B] mr-2 font-bold">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {Boolean(openServices[1]) && (
+                  <div className="w-full mt-3 animate-fade-in">
+                    <ul className="space-y-2 text-left text-gray-700 text-xs">
+                      {servicesList[0].items.map((item, index) => (
+                        <li key={index} className="flex items-start">
+                          <span className="text-[#4CAF50] mr-2 font-bold text-2xl leading-none">•</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
 
               {/* Service Card 2: HVAC */}
               <div className="bg-gray-50 rounded-lg p-4 shadow-lg border border-gray-100 flex flex-col items-center text-center relative min-h-[200px]">
                 {/* Icon */}
                 <div className="mb-3">
-                  <svg className="w-12 h-12 text-[#FFEB3B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-12 h-12 text-[#4CAF50]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                   </svg>
                 </div>
                 {/* Separator Line */}
-                <div className="h-0.5 w-12 bg-[#FFEB3B] mb-3"></div>
+                <div className="h-0.5 w-12 bg-[#4CAF50] mb-3"></div>
                 {/* Text */}
                 <h3 className="text-xs font-bold uppercase text-gray-900 mb-4 leading-tight">HVAC</h3>
                 {/* Plus Button */}
                 <button
-                  onClick={() => toggleService(2)}
-                  className="w-8 h-8 rounded-full bg-[#FFEB3B] flex items-center justify-center hover:scale-110 transition-transform"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    toggleService(2)
+                  }}
+                  className="w-8 h-8 rounded-full bg-[#4CAF50] flex items-center justify-center hover:scale-110 transition-transform"
+                  type="button"
                 >
-                  {openServices[2] ? (
-                    <svg className="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  {Boolean(openServices[2]) ? (
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M20 12H4" />
                     </svg>
                   ) : (
-                    <svg className="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 4v16m8-8H4" />
                     </svg>
                   )}
                 </button>
                 {/* Dropdown Content */}
-                <div
-                  className={`w-full overflow-hidden transition-all duration-300 ${
-                    openServices[2] ? 'max-h-[500px] opacity-100 mt-3' : 'max-h-0 opacity-0'
-                  }`}
-                >
-                  <ul className="space-y-2 text-left text-gray-700 text-xs">
-                    {servicesList[1].items.map((item, index) => (
-                      <li key={index} className="flex items-start">
-                        <span className="text-[#FFEB3B] mr-2 font-bold">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {Boolean(openServices[2]) && (
+                  <div className="w-full mt-3 animate-fade-in">
+                    <ul className="space-y-2 text-left text-gray-700 text-xs">
+                      {servicesList[1].items.map((item, index) => (
+                        <li key={index} className="flex items-start">
+                          <span className="text-[#4CAF50] mr-2 font-bold text-2xl leading-none">•</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
 
               {/* Service Card 3: BMS */}
               <div className="bg-gray-50 rounded-lg p-4 shadow-lg border border-gray-100 flex flex-col items-center text-center relative min-h-[200px]">
                 {/* Icon */}
                 <div className="mb-3">
-                  <svg className="w-12 h-12 text-[#FFEB3B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-12 h-12 text-[#4CAF50]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                   </svg>
                 </div>
                 {/* Separator Line */}
-                <div className="h-0.5 w-12 bg-[#FFEB3B] mb-3"></div>
+                <div className="h-0.5 w-12 bg-[#4CAF50] mb-3"></div>
                 {/* Text */}
                 <h3 className="text-xs font-bold uppercase text-gray-900 mb-4 leading-tight">BMS</h3>
                 {/* Plus Button */}
                 <button
-                  onClick={() => toggleService(3)}
-                  className="w-8 h-8 rounded-full bg-[#FFEB3B] flex items-center justify-center hover:scale-110 transition-transform"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    toggleService(3)
+                  }}
+                  className="w-8 h-8 rounded-full bg-[#4CAF50] flex items-center justify-center hover:scale-110 transition-transform"
+                  type="button"
                 >
-                  {openServices[3] ? (
-                    <svg className="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  {Boolean(openServices[3]) ? (
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M20 12H4" />
                     </svg>
                   ) : (
-                    <svg className="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 4v16m8-8H4" />
                     </svg>
                   )}
                 </button>
                 {/* Dropdown Content */}
-                <div
-                  className={`w-full overflow-hidden transition-all duration-300 ${
-                    openServices[3] ? 'max-h-[500px] opacity-100 mt-3' : 'max-h-0 opacity-0'
-                  }`}
-                >
-                  <ul className="space-y-2 text-left text-gray-700 text-xs">
-                    {servicesList[2].items.map((item, index) => (
-                      <li key={index} className="flex items-start">
-                        <span className="text-[#FFEB3B] mr-2 font-bold">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {Boolean(openServices[3]) && (
+                  <div className="w-full mt-3 animate-fade-in">
+                    <ul className="space-y-2 text-left text-gray-700 text-xs">
+                      {servicesList[2].items.map((item, index) => (
+                        <li key={index} className="flex items-start">
+                          <span className="text-[#4CAF50] mr-2 font-bold text-2xl leading-none">•</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
 
               {/* Service Card 4: SYSTEM SERVICE & ANNUAL MAINTENANCE */}
               <div className="bg-gray-50 rounded-lg p-4 shadow-lg border border-gray-100 flex flex-col items-center text-center relative min-h-[200px]">
                 {/* Icon */}
                 <div className="mb-3">
-                  <svg className="w-12 h-12 text-[#FFEB3B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-12 h-12 text-[#4CAF50]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
                 {/* Separator Line */}
-                <div className="h-0.5 w-12 bg-[#FFEB3B] mb-3"></div>
+                <div className="h-0.5 w-12 bg-[#4CAF50] mb-3"></div>
                 {/* Text */}
                 <h3 className="text-xs font-bold uppercase text-gray-900 mb-4 leading-tight">SYSTEM SERVICE & ANNUAL MAINTENANCE</h3>
                 {/* Plus Button */}
                 <button
-                  onClick={() => toggleService(4)}
-                  className="w-8 h-8 rounded-full bg-[#FFEB3B] flex items-center justify-center hover:scale-110 transition-transform"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    toggleService(4)
+                  }}
+                  className="w-8 h-8 rounded-full bg-[#4CAF50] flex items-center justify-center hover:scale-110 transition-transform"
+                  type="button"
                 >
-                  {openServices[4] ? (
-                    <svg className="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  {Boolean(openServices[4]) ? (
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M20 12H4" />
                     </svg>
                   ) : (
-                    <svg className="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 4v16m8-8H4" />
                     </svg>
                   )}
                 </button>
                 {/* Dropdown Content */}
-                <div
-                  className={`w-full overflow-hidden transition-all duration-300 ${
-                    openServices[4] ? 'max-h-[500px] opacity-100 mt-3' : 'max-h-0 opacity-0'
-                  }`}
-                >
-                  <ul className="space-y-2 text-left text-gray-700 text-xs">
-                    {servicesList[3].items.map((item, index) => (
-                      <li key={index} className="flex items-start">
-                        <span className="text-[#FFEB3B] mr-2 font-bold">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {Boolean(openServices[4]) && (
+                  <div className="w-full mt-3 animate-fade-in">
+                    <ul className="space-y-2 text-left text-gray-700 text-xs">
+                      {servicesList[3].items.map((item, index) => (
+                        <li key={index} className="flex items-start">
+                          <span className="text-[#4CAF50] mr-2 font-bold text-2xl leading-none">•</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -629,27 +662,7 @@ function Home() {
         </div>
       </section>
 
-      {/* --- FOOTER: Clean & Minimal --- */}
-      <footer className="bg-white border-t border-gray-100 py-16 px-6">
-        <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="text-center md:text-left">
-             <div className="text-2xl font-bold text-[#4CAF50] mb-2">winds<span className="text-black">m</span>ill</div>
-             <p className="text-gray-400 text-sm">Making every space healthier and pleasant.</p>
-          </div>
-          
-          <div className="flex gap-8 text-sm font-medium text-gray-600">
-            <a href="#" className="hover:text-[#4CAF50] transition-colors">Home</a>
-            <a href="#" className="hover:text-[#4CAF50] transition-colors">Services</a>
-            <a href="#" className="hover:text-[#4CAF50] transition-colors">Projects</a>
-            <a href="#" className="hover:text-[#4CAF50] transition-colors">Contact</a>
-          </div>
-
-          <div className="text-gray-400 text-sm">
-            © 2024 Windsmit Air.
-          </div>
-        </div>
-      </footer>
-
+      <Footer />
     </div>
   )
 }
