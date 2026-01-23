@@ -57,7 +57,7 @@ function About() {
   ]
 
   return (
-    <div className="bg-gradient-to-br from-[#e8f5e9] via-[#f1f8e9] to-[#fff9c4] min-h-screen pb-24">
+    <div className="bg-white min-h-screen pb-24">
 
       {/* Hero Section */}
       <div className="relative flex flex-col" style={backgroundStyle}>
