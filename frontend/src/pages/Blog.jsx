@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import Footer from '../components/Footer'
 
 function Blog() {
   const [posts, setPosts] = useState([])
@@ -8,12 +9,35 @@ function Blog() {
 
   const categories = ['all', 'HVAC', 'Air Conditioning', 'BMS', 'Maintenance', 'Energy Efficiency']
 
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+  // Normalize API URL - remove trailing slashes and ensure proper format
+  const getApiUrl = () => {
+    const envUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+    // Remove trailing slashes
+    let cleanUrl = envUrl.replace(/\/+$/, '')
+    // If URL doesn't start with http, add https://
+    if (!cleanUrl.startsWith('http://') && !cleanUrl.startsWith('https://')) {
+      cleanUrl = `https://${cleanUrl}`
+    }
+    // Ensure /api is included if not present (for production URLs)
+    if (!cleanUrl.includes('/api') && !cleanUrl.includes('localhost')) {
+      cleanUrl = `${cleanUrl}/api`
+    }
+    return cleanUrl
+  }
+
+  const API_URL = getApiUrl()
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch(`${API_URL}/blog?published=true`)
+        const url = `${API_URL}/blog?published=true`
+        console.log('Fetching posts from:', url)
+        const response = await fetch(url)
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
+        
         const data = await response.json()
         setPosts(data)
         setLoading(false)
@@ -25,7 +49,7 @@ function Blog() {
       }
     }
     fetchPosts()
-  }, [])
+  }, [API_URL])
 
   const filteredPosts = selectedCategory === 'all' 
     ? posts 
@@ -167,6 +191,7 @@ function Blog() {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   )
 }

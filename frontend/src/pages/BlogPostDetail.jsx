@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
+import Footer from '../components/Footer'
 
 function BlogPostDetail() {
   const { id } = useParams()
@@ -8,13 +9,31 @@ function BlogPostDetail() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+  // Normalize API URL - remove trailing slashes and ensure proper format
+  const getApiUrl = () => {
+    const envUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+    // Remove trailing slashes
+    let cleanUrl = envUrl.replace(/\/+$/, '')
+    // If URL doesn't start with http, add https://
+    if (!cleanUrl.startsWith('http://') && !cleanUrl.startsWith('https://')) {
+      cleanUrl = `https://${cleanUrl}`
+    }
+    // Ensure /api is included if not present (for production URLs)
+    if (!cleanUrl.includes('/api') && !cleanUrl.includes('localhost')) {
+      cleanUrl = `${cleanUrl}/api`
+    }
+    return cleanUrl
+  }
+
+  const API_URL = getApiUrl()
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
         setLoading(true)
-        const response = await fetch(`${API_URL}/blog/${id}`)
+        const url = `${API_URL}/blog/${id}`
+        console.log('Fetching post from:', url)
+        const response = await fetch(url)
         
         if (!response.ok) {
           throw new Error('Post not found')
@@ -33,7 +52,7 @@ function BlogPostDetail() {
     if (id) {
       fetchPost()
     }
-  }, [id])
+  }, [id, API_URL])
 
   const formatDate = (dateString) => {
     if (!dateString) return ''
@@ -211,6 +230,7 @@ function BlogPostDetail() {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   )
 }

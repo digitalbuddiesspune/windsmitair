@@ -1,7 +1,23 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+// Normalize API URL - remove trailing slashes and ensure proper format
+const getApiUrl = () => {
+  const envUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+  // Remove trailing slashes
+  let cleanUrl = envUrl.replace(/\/+$/, '')
+  // If URL doesn't start with http, add https://
+  if (!cleanUrl.startsWith('http://') && !cleanUrl.startsWith('https://')) {
+    cleanUrl = `https://${cleanUrl}`
+  }
+  // Ensure /api is included if not present (for production URLs)
+  if (!cleanUrl.includes('/api') && !cleanUrl.includes('localhost')) {
+    cleanUrl = `${cleanUrl}/api`
+  }
+  return cleanUrl
+}
+
+const API_URL = getApiUrl()
 
 function Admin() {
   const navigate = useNavigate()

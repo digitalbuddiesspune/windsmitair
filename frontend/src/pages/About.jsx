@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Footer from '../components/Footer'
 
 function About() {
   const [scrollRotation, setScrollRotation] = useState(0)
@@ -211,6 +212,7 @@ function About() {
         </div>
 
       </div>
+      <Footer />
     </div>
   )
 }
