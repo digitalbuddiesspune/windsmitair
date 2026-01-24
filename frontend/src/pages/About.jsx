@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 function About() {
   const [scrollRotation, setScrollRotation] = useState(0)
+  const [expandedIndex, setExpandedIndex] = useState(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,8 +66,8 @@ function About() {
       </div>
 
       {/* Rotating Image Overlay - Pulled higher with -mt-48 */}
-      <div className="relative -mt-38 flex justify-center z-20">
-        <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl border-8 border-white">
+      <div className="relative -mt-40 flex justify-center z-20">
+        <div className="w-64 h-64 md:w-70 md:h-70 rounded-full overflow-hidden shadow-2xl border-8 border-white">
           <img
             src="https://indiaclimatecollaborative.org/public/uploads/our_work/1/1722229640_1.webp"
             alt="Windsmit Air Conditioner"
@@ -120,7 +121,7 @@ Our two-fold vision aims to be the premier provider of innovative, cost effectiv
               </div>
               <div className="w-full md:w-1/2">
                 <img 
-                  src="https://res.cloudinary.com/dvkxgrcbv/image/upload/v1769159573/visio._jjozfx.png" 
+                  src="https://res.cloudinary.com/dvkxgrcbv/image/upload/v1769238611/Untitled_design_2_w1lmdm.png" 
                   alt="Vision" 
                   className="w-full h-auto rounded-3xl object-cover shadow-lg border-4 border-white"
                 />
@@ -140,7 +141,7 @@ Our two-fold vision aims to be the premier provider of innovative, cost effectiv
 </div>
               <div className="w-full md:w-1/2">
                 <img 
-                  src="https://res.cloudinary.com/dvkxgrcbv/image/upload/v1769159581/vision222_oqft8h.png" 
+                  src="https://res.cloudinary.com/dvkxgrcbv/image/upload/v1769237073/ChatGPT_Image_Jan_24_2026_12_12_37_PM_pxjwos.jpg" 
                   alt="Mission" 
                   className="w-full h-auto rounded-3xl object-cover shadow-lg border-4 border-white"
                 />
@@ -155,32 +156,41 @@ Our two-fold vision aims to be the premier provider of innovative, cost effectiv
     <div className="h-1.5 w-24 bg-yellow-400 mx-auto rounded-full"></div>
   </div>
   
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    {values.map((val, index) => (
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  {values.map((val, index) => {
+    const isOpen = expandedIndex === index;
+
+    return (
       <div 
         key={index} 
-        // Changed rounded-full to rounded-2xl for rectangle shape
-        // Removed aspect-square to allow height to fit content naturally
-        className="relative bg-white flex flex-col items-start justify-start text-left p-8 rounded-2xl shadow-md border-t-4 border-green-600 transition-all duration-300"
+        className="bg-white flex flex-col items-start justify-center text-left p-4 rounded-xl shadow-sm border-t-4 border-green-600 transition-all duration-300 cursor-pointer hover:shadow-md h-fit"
+        onClick={() => setExpandedIndex(isOpen ? null : index)}
       >
-        {/* Value Number - Positioned to the right for a modern feel */}
-        
-        <h3 className="text-xl font-bold text-green-800 mb-4 relative z-10 uppercase tracking-tight">
-          {val.title}
-        </h3>
-        
-        <div className="h-1 w-12 bg-yellow-400 mb-4 rounded-full"></div>
+        <div className="flex justify-between items-center w-full">
+          <h3 className="text-base font-bold text-green-800 uppercase tracking-tight">
+            {val.title}
+          </h3>
+          <div className={`flex items-center justify-center w-6 h-6 rounded-full transition-colors ${isOpen ? 'bg-yellow-400' : 'bg-gray-100'}`}>
+             <span className="text-lg font-bold text-green-900 leading-none">
+               {isOpen ? '−' : '+'}
+             </span>
+          </div>
+        </div>
 
-        <p className="text-gray-700 text-sm leading-relaxed relative z-10 font-medium">
-          {val.text}
-        </p>
-        
-        <p className="mt-4 text-xs text-green-700 font-bold italic relative z-10 bg-green-50 p-3 rounded-lg border-l-2 border-green-600 w-full">
-          {val.extra}
-        </p>
+        {/* Content Section */}
+        <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 mt-4' : 'max-h-0'}`}>
+          <div className="h-0.5 w-12 bg-yellow-400 mb-3 rounded-full"></div>
+          <p className="text-gray-700 text-xs leading-relaxed font-medium mb-3">
+            {val.text}
+          </p>
+          <p className="text-[10px] text-green-700 font-bold italic bg-green-50 p-2 rounded border-l-2 border-green-600 w-full">
+            {val.extra}
+          </p>
+        </div>
       </div>
-    ))}
-  </div>
+    );
+  })}
+</div>
 </div>
 
       </div>
