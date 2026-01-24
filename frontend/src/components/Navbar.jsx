@@ -7,25 +7,20 @@ function Navbar() {
   return (
     <nav className="sticky top-0 z-50 w-full bg-white px-6 md:px-12 lg:px-16 py-3 shadow-sm border-b border-gray-100">
       <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0">
-        <div className="flex flex-col leading-none relative">
-          <div className="relative inline-block">
-            <span className="text-2xl md:text-3xl font-bold text-[#4CAF50] font-sans tracking-tight">
-              winds<span className="relative inline-block">
-                m<span className="relative inline-block">
-                  i<span className="absolute -top-1 left-0.5 text-[#4CAF50] text-xl leading-none">•</span>
-                </span>
-              </span>l
-            </span>
-          </div>
-          <span className="text-sm md:text-base text-[#4CAF50] font-sans font-normal ml-2 mt-0.5">Air</span>
-        </div>
+        <Link to="/" className="flex items-center">
+          <img 
+            src="https://res.cloudinary.com/dvkxgrcbv/image/upload/v1769169572/43d9b706-5a0a-442d-a1da-394f1bfdce56.png" 
+            alt="Windsmit Air Logo" 
+            className="h-12 md:h-14 w-auto object-contain"
+          />
+        </Link>
         
         <div className="flex items-center flex-wrap justify-center gap-4 md:gap-6 lg:gap-8">
-          <Link to="/" className="text-black no-underline font-sans text-[15px] md:text-base font-normal transition-colors hover:text-gray-800">
+          <Link to="/" className="text-black no-underline font-sans text-[15px] md:text-base font-normal transition-colors hover:text-[#F9A825]">
             Home
           </Link>
           
-          <Link to="/about" className="text-black no-underline font-sans text-[15px] md:text-base font-normal transition-colors hover:text-gray-800">
+          <Link to="/about" className="text-black no-underline font-sans text-[15px] md:text-base font-normal transition-colors hover:text-[#F9A825]">
             About Us
           </Link>
           
@@ -34,30 +29,33 @@ function Navbar() {
             onMouseEnter={() => setServicesDropdown(true)}
             onMouseLeave={() => setServicesDropdown(false)}
           >
-            <a href="#" className="text-black no-underline font-sans text-[15px] md:text-base font-normal transition-colors hover:text-gray-800 flex items-center gap-1.5">
+            <a href="#" className="text-black no-underline font-sans text-[15px] md:text-base font-normal transition-colors hover:text-[#F9A825] flex items-center gap-1.5">
               Services
               <span className="text-[10px] leading-none">▼</span>
             </a>
             {servicesDropdown && (
-              <div className="absolute top-full left-0 bg-white shadow-xl rounded-md py-2 mt-3 min-w-[160px] z-[1000] border border-gray-100">
+              <div className="absolute top-full left-0 bg-white shadow-xl rounded-md py-2 mt-3 min-w-[280px] z-[1000] border border-gray-100">
                 <a href="#" className="block px-4 py-2.5 text-black no-underline font-sans text-sm hover:bg-gray-50 transition-colors">
-                  Service 1
+                  Air Conditioning
                 </a>
                 <a href="#" className="block px-4 py-2.5 text-black no-underline font-sans text-sm hover:bg-gray-50 transition-colors">
-                  Service 2
+                  HVAC
                 </a>
                 <a href="#" className="block px-4 py-2.5 text-black no-underline font-sans text-sm hover:bg-gray-50 transition-colors">
-                  Service 3
+                  BMS
+                </a>
+                <a href="#" className="block px-4 py-2.5 text-black no-underline font-sans text-sm hover:bg-gray-50 transition-colors">
+                  System Service & Annual Maintenance
                 </a>
               </div>
             )}
           </div>
           
-          <a href="#" className="text-black no-underline font-sans text-[15px] md:text-base font-normal transition-colors hover:text-gray-800">
+          <a href="#" className="text-black no-underline font-sans text-[15px] md:text-base font-normal transition-colors hover:text-[#F9A825]">
             Contact us
           </a>
           
-          <a href="#" className="text-black no-underline font-sans text-[15px] md:text-base font-normal transition-colors hover:text-gray-800 flex items-center justify-center">
+          <a href="#" className="text-black no-underline font-sans text-[15px] md:text-base font-normal transition-colors hover:text-[#F9A825] flex items-center justify-center">
             <svg 
               className="w-6 h-6" 
               viewBox="0 0 24 24" 
@@ -71,7 +69,7 @@ function Navbar() {
             </svg>
           </a>
           
-          <a href="#" className="text-black no-underline font-sans text-[15px] md:text-base font-normal transition-colors hover:text-gray-800">
+          <a href="#" className="text-black no-underline font-sans text-[15px] md:text-base font-normal transition-colors hover:text-[#F9A825]">
             Blog
           </a>
         </div>
