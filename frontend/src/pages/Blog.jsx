@@ -8,10 +8,12 @@ function Blog() {
 
   const categories = ['all', 'HVAC', 'Air Conditioning', 'BMS', 'Maintenance', 'Energy Efficiency']
 
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/blog?published=true')
+        const response = await fetch(`${API_URL}/blog?published=true`)
         const data = await response.json()
         setPosts(data)
         setLoading(false)
