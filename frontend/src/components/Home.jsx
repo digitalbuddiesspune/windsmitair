@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Footer from './Footer'
+import WhyChooseUs from './WhyChooseUs'
 
 // --- 1. DATA CONSTANTS ---
 
@@ -539,6 +540,7 @@ function Home() {
 
       {/* --- INCLUDED COMPONENTS --- */}
       <OurExpertise />
+      <WhyChooseUs />
       <Footer />
     </div>
   )
