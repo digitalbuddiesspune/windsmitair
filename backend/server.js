@@ -4,6 +4,8 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import blogRoutes from './routes/blogRoutes.js'
 import authRoutes from './routes/authRoutes.js'
+import storyRoutes from './routes/storyRoutes.js'
+import settingsRoutes from './routes/settingsRoutes.js'
 
 dotenv.config()
 
@@ -27,6 +29,8 @@ mongoose.connect(process.env.MONGODB_URI)
 // Routes
 app.use('/api/auth', authRoutes)
 app.use('/api/blog', blogRoutes)
+app.use('/api/stories', storyRoutes)
+app.use('/api/settings', settingsRoutes)
 
 // Health check
 app.get('/api/health', (req, res) => {

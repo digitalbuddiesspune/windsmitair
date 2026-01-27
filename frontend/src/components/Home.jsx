@@ -87,6 +87,19 @@ const banners = [
   }
 ]
 
+// Helper to normalize API URL (same pattern as Blog/Admin)
+const getApiUrl = () => {
+  const envUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+  let cleanUrl = envUrl.replace(/\/+$/, '')
+  if (!cleanUrl.startsWith('http://') && !cleanUrl.startsWith('https://')) {
+    cleanUrl = `https://${cleanUrl}`
+  }
+  if (!cleanUrl.includes('/api') && !cleanUrl.includes('localhost')) {
+    cleanUrl = `${cleanUrl}/api`
+  }
+  return cleanUrl
+}
+
 // --- 2. INTERNAL COMPONENTS ---
 
 function OurExpertise() {
@@ -202,6 +215,9 @@ function OurExpertise() {
 function Home() {
   const [currentBanner, setCurrentBanner] = useState(0)
   const [openServices, setOpenServices] = useState({})
+  const [stories, setStories] = useState([])
+  const [activeStory, setActiveStory] = useState(null)
+  const [showStories, setShowStories] = useState(true)
 
   // Auto-slide logic
   useEffect(() => {
@@ -211,6 +227,40 @@ function Home() {
       }, 6000)
       return () => clearInterval(interval)
     }
+  }, [])
+
+  // Fetch stories setting
+  useEffect(() => {
+    const fetchStoriesSetting = async () => {
+      try {
+        const response = await fetch(`${getApiUrl()}/settings/showStories`)
+        if (response.ok) {
+          const data = await response.json()
+          setShowStories(data.value)
+        }
+      } catch (error) {
+        console.error('Error fetching stories setting:', error)
+        // Default to true if error
+        setShowStories(true)
+      }
+    }
+    fetchStoriesSetting()
+  }, [])
+
+  // Fetch stories for \"Instagram-like\" story section
+  useEffect(() => {
+    const fetchStories = async () => {
+      try {
+        const API_URL = getApiUrl()
+        const response = await fetch(`${API_URL}/stories?active=true`)
+        if (!response.ok) return
+        const data = await response.json()
+        setStories(data)
+      } catch {
+        // fail silently on homepage
+      }
+    }
+    fetchStories()
   }, [])
 
   // Accordion toggle logic
@@ -324,6 +374,97 @@ function Home() {
           ))}
         </div>
       </section>
+
+      {/* --- STORIES SECTION --- */}
+      {showStories && stories.length > 0 && (
+        <section className="px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 py-8 bg-slate-50 border-b border-slate-200">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-6">
+              <span className="inline-block px-2.5 py-0.5 bg-emerald-50 text-emerald-600 font-semibold uppercase tracking-widest text-[10px] rounded-full mb-2">
+                Project Highlights
+              </span>
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-1.5">
+                Our Work in Action
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto">
+                Explore our recent installations and project showcases
+              </p>
+            </div>
+
+            <div className="flex items-center justify-center gap-4 sm:gap-5 overflow-x-auto pb-3 scrollbar-thin scrollbar-thumb-slate-300 scrollbar-track-transparent">
+              {stories.map((story) => (
+                <button
+                  key={story._id}
+                  onClick={() => setActiveStory(story)}
+                  className="group flex-shrink-0 flex flex-col items-center gap-2.5 focus:outline-none"
+                >
+                  <div className="relative">
+                    <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-600 p-0.5 group-hover:p-1 transition-all duration-300 shadow-lg shadow-emerald-500/20 group-hover:shadow-xl group-hover:shadow-emerald-500/30">
+                      <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden">
+                        <div className="relative w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900">
+                          <span className="text-xs sm:text-sm font-bold text-white text-center px-3 leading-tight z-10 relative">
+                            {story.title}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-emerald-500 rounded-full border-2 border-white flex items-center justify-center shadow-lg group-hover:bg-emerald-400 group-hover:scale-110 transition-all duration-300">
+                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <span className="text-xs font-semibold text-slate-800 max-w-[90px] truncate group-hover:text-emerald-600 transition-colors">
+                    {story.title}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Story Modal */}
+          {activeStory && (
+            <div 
+              className="fixed inset-0 z-[120] bg-black/80 backdrop-blur-sm flex items-center justify-center px-4 py-8"
+              onClick={() => setActiveStory(null)}
+            >
+              <div 
+                className="relative bg-slate-900 rounded-xl overflow-hidden max-w-4xl w-full shadow-2xl border border-slate-700"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  onClick={() => setActiveStory(null)}
+                  className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/60 backdrop-blur-sm text-white flex items-center justify-center hover:bg-black/80 transition-all hover:scale-110"
+                  aria-label="Close story"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+                <div className="px-6 py-4 bg-gradient-to-r from-slate-800 to-slate-900 border-b border-slate-700 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center text-sm font-bold text-white shadow-lg">
+                    WA
+                  </div>
+                  <div>
+                    <p className="text-base font-semibold text-white">
+                      {activeStory.title}
+                    </p>
+                    <p className="text-xs text-slate-400">Windsmit Air</p>
+                  </div>
+                </div>
+                <div className="bg-black flex items-center justify-center aspect-video">
+                  <video
+                    src={activeStory.videoUrl}
+                    controls
+                    autoPlay
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+        </section>
+      )}
 
       {/* --- IDENTITY SECTION --- */}
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 bg-white">
